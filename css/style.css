@@ -1,0 +1,19 @@
+#test {
+    width: 700px;
+    height:600px;
+    margin: 0px auto;
+    border: 1px solid red;
+}
+
+body{
+    background-image: url('../images/background.jpg');
+}
+
+#team-athena-text{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 0px auto;
+    color: white;
+}
