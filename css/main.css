@@ -1,19 +1,24 @@
 #test {
-    width: 700px;
-    height:600px;
+    width: 1200px;
+    height: 600px;
     margin: 0px auto;
     border: 1px solid red;
 }
 
-body{
+body {
     background-image: url('../images/background.jpg');
 }
 
-#team-athena-text{
+#team-athena-text {
     text-align: center;
     font-size: 25px;
     font-weight: bold;
     padding: 10px;
     margin: 0px auto;
     color: white;
+}
+
+#myCanvas {
+    width: 1200px;
+    height: 600px;
 }
