@@ -22,3 +22,11 @@ body {
     width: 1200px;
     height: 600px;
 }
+
+#beerSpriteSheet{
+    display: none;
+}
+
+#beerCanvas{
+    z-index: 10;
+}
