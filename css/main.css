@@ -23,10 +23,14 @@ body {
     height: 600px;
 }
 
-#beerSpriteSheet{
+#beerSpriteSheet {
     display: none;
 }
 
-#beerCanvas{
+#smurfWalkingSheet {
+    display: none;
+}
+
+#beerCanvas {
     z-index: 10;
 }
