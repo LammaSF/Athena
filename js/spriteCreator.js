@@ -1,4 +1,3 @@
-    'use strict'
     function createSprite(options) {
 
         function render(drawCoordinates, clearCoordinates) {
@@ -22,13 +21,14 @@
                 options.imgWidth / 2,
                 options.imgHeight / 2
             );
+
+            return self;
         }
 
         function update(){
             var self = this;
 
             self.ticksCount += 1;
-            console.log(self.maxTicks);
             if(self.ticksCount >= self.maxTicks) {
                 self.ticksCount = 0;
                 self.frameIndex += 1;

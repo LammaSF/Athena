@@ -7,6 +7,10 @@ window.addEventListener('load', function() {
         beerContext = beerCanvas.getContext('2d'),
         beerSpriteSheet = document.getElementById('beerSpriteSheet');
 
+        
+    let drawCoordinatesY = getRandomArbitrary(550, 550);
+    let drawCoordinatesX = 1200;
+
     var smurfCanvas = document.getElementById('smurfCanvas'),
         smurfContext = smurfCanvas.getContext('2d'),
         smurfSpriteSheet = document.getElementById('smurfWalkingSheet');
@@ -39,17 +43,22 @@ window.addEventListener('load', function() {
         imgHeight: smurfSpriteSheet.height
     });
 
+    var beerBody = createPhysicalBody({
+        coordinates: { x: drawCoordinatesX, y: drawCoordinatesY },
+        speed: { x: -3, y: 0 },
+        height: beerSprite.imgWidth,
+        width: beerSprite.imgHeight
+    });
+
     function gameLoop() {
 
-        let drawCoordinatesY = getRandomArbitrary(550, 550);
-        let drawCoordinatesX = 500;
-        drawCoordinatesX -= 1;
 
-        beerSprite.render({ x: drawCoordinatesX, y: drawCoordinatesY }, { x: drawCoordinatesX, y: drawCoordinatesY });
-        beerSprite.update();
 
-        smurfSprite.render({ x: 0, y: 0 }, { x: 0, y: 0 });
-        smurfSprite.update();
+        let beerLastCoordinates = beerBody.move();
+        beerSprite.render(beerBody.coordinates, beerLastCoordinates).update();
+
+        smurfSprite.render({ x: 0, y: 0 }, { x: 0, y: 0 }).update();
+        
         window.requestAnimationFrame(gameLoop);
     }
 
