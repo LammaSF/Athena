@@ -11,7 +11,11 @@ function createPhysicalBody(options) {
     }
 
     function collides (body) {
-        return true;
+        if(this.coordinates.x === body.coordinates.x){
+            return true;
+        }
+        
+        return false;
     }
 
     var physicalBody = {
