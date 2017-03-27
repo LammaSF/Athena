@@ -34,7 +34,7 @@
 }
 
 #smurfCanvas {
-
+    margin-top: 450px;
     z-index: 10;
     position: absolute;
 }

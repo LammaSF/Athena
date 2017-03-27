@@ -106,6 +106,12 @@ window.addEventListener('load', function() {
                 beer.beerSprite.render(beer.beerBody.coordinates, beerLastCoordinates).update();
 
                 if(smurfBody.collides(beer.beerBody)){
+                    console.log(beerContext.clearRect(
+                        beer.beerBody.coordinates.x,
+                        beer.beerBody.coordinates.y,
+                        beer.beerBody.width,
+                        beer.beerBody.height
+                    ));
                     beers.splice(i,1);
                     i-=1;
                     beerCounter += 1;
