@@ -45,7 +45,7 @@ window.addEventListener('load', function() {
 
     var beerBody = createPhysicalBody({
         coordinates: { x: 1000, y: 70 } ,
-        speed: { x: -3, y: 0 },
+        speed: { x: -2, y: 0 },
         height: beerSprite.imgWidth,
         width: beerSprite.imgHeight
     });
