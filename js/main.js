@@ -44,20 +44,37 @@ window.addEventListener('load', function() {
     });
 
     var beerBody = createPhysicalBody({
-        coordinates: { x: drawCoordinatesX, y: drawCoordinatesY },
+        coordinates: { x: 1000, y: 70 } ,
         speed: { x: -3, y: 0 },
         height: beerSprite.imgWidth,
         width: beerSprite.imgHeight
     });
+    
+    var smurfBody = createPhysicalBody({
+        coordinates: { x: 50, y: 70 },
+        speed: { x: 0, y: 0 },
+        height: smurfSprite.imgWidth,
+        width: smurfSprite.imgHeight
+    });
+
+    var $caughtBeers = $("#caughtBeers");
+    var beerCounter = 0;
 
     function gameLoop() {
 
 
-
+        let smurfLastCoordinates = smurfBody.move();
         let beerLastCoordinates = beerBody.move();
+        
         beerSprite.render(beerBody.coordinates, beerLastCoordinates).update();
-
         smurfSprite.render({ x: 0, y: 0 }, { x: 0, y: 0 }).update();
+        
+        if(smurfBody.collides(beerBody)){
+            beerSprite.render({ x: 1000, y: 70 }, beerLastCoordinates)
+            beerBody.coordinates = { x: 1000, y: 70 };
+            beerCounter += 1;
+            $caughtBeers.text("Хванати бири: " + beerCounter);
+        }
         
         window.requestAnimationFrame(gameLoop);
     }
