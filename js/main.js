@@ -87,6 +87,12 @@ window.addEventListener('load', function() {
     var $caughtBeers = $("#caughtBeers");
     var beerCounter = 0;
 
+    var background = createBackground({
+        width: 1200,
+        height: 600,
+        speedX: 10
+    });
+
     function gameLoop() {
 
         
@@ -122,7 +128,8 @@ window.addEventListener('load', function() {
 
         smurfSprite.render({ x: 0, y: 0 }, { x: 0, y: 0 }).update();
         
-
+        background.render();
+        background.update();
         
         window.requestAnimationFrame(gameLoop);
     }
