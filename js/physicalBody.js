@@ -1,7 +1,7 @@
 function createPhysicalBody(options) {
     function move() {
 
-        var self = this,
+        let self = this,
             lastCoordinates = { x: self.coordinates.x, y: self.coordinates.y };
 
         self.coordinates.x += self.speed.x;
@@ -18,7 +18,7 @@ function createPhysicalBody(options) {
         return false;
     }
 
-    var physicalBody = {
+    let physicalBody = {
         coordinates: options.coordinates,
         speed: options.speed,
         height: options.height,

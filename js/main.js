@@ -2,22 +2,22 @@ window.addEventListener('load', function() {
 
     // set browser icon
     (function() {
-        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
         link.href = './images/icon.png';
         document.getElementsByTagName('head')[0].appendChild(link);
     }());
 
-    var beerCanvas = document.getElementById('beerCanvas'),
+    let beerCanvas = document.getElementById('beerCanvas'),
         beerContext = beerCanvas.getContext('2d'),
         beerSpriteSheet = document.getElementById('beerSpriteSheet');
 
-    var smurfCanvas = document.getElementById('smurfCanvas'),
+    let smurfCanvas = document.getElementById('smurfCanvas'),
         smurfContext = smurfCanvas.getContext('2d'),
         smurfSpriteSheet = document.getElementById('smurfWalkingSheet');
         
-    var smurfSprite = createSprite({
+    let smurfSprite = createSprite({
         spriteSheet: smurfSpriteSheet,
         context: smurfContext,
         width: smurfSpriteSheet.width / 8,
@@ -31,7 +31,7 @@ window.addEventListener('load', function() {
         imgHeight: smurfSpriteSheet.height
     });
 
-    var smurfBody = createPhysicalBody({
+    let smurfBody = createPhysicalBody({
         coordinates: { x: 50, y: 70 },
         speed: { x: 0, y: 0 },
         height: smurfSprite.imgWidth,
@@ -40,7 +40,7 @@ window.addEventListener('load', function() {
 
     function createBeer(startingX, startingY){
         
-        var beerSprite = createSprite({
+        let beerSprite = createSprite({
             spriteSheet: beerSpriteSheet,
             context: beerContext,
             width: beerSpriteSheet.width / 4,
@@ -54,7 +54,7 @@ window.addEventListener('load', function() {
             imgHeight: beerSpriteSheet.height / 4
         });
         
-        var beerBody = createPhysicalBody({
+        let beerBody = createPhysicalBody({
             coordinates: { x: startingX, y: startingY },
             speed: { x: -3, y: 0 },
             height: beerSprite.imgWidth,
@@ -84,10 +84,10 @@ window.addEventListener('load', function() {
         }
     }
 
-    var $caughtBeers = $("#caughtBeers");
-    var beerCounter = 0;
+    let $caughtBeers = $("#caughtBeers");
+    let beerCounter = 0;
 
-    var background = createBackground({
+    let background = createBackground({
         width: 1200,
         height: 600,
         speedX: 10
@@ -112,12 +112,12 @@ window.addEventListener('load', function() {
                 beer.beerSprite.render(beer.beerBody.coordinates, beerLastCoordinates).update();
 
                 if(smurfBody.collides(beer.beerBody)){
-                    console.log(beerContext.clearRect(
+                    beerContext.clearRect(
                         beer.beerBody.coordinates.x,
                         beer.beerBody.coordinates.y,
                         beer.beerBody.width,
                         beer.beerBody.height
-                    ));
+                    );
                     beers.splice(i,1);
                     i-=1;
                     beerCounter += 1;

@@ -1,5 +1,5 @@
 ﻿function createBackground(options) {
-    var backgroundCanvas = document.getElementById('background-canvas'),
+    let backgroundCanvas = document.getElementById('background-canvas'),
         context = backgroundCanvas.getContext('2d'),
         backgroundImg = document.getElementById('background');
 
@@ -28,7 +28,7 @@
         }
     }
 
-    var background = {
+    let background = {
         image: backgroundImg,
         speedX: options.speedX,
         coordinates: { x: 0, y: 0 },

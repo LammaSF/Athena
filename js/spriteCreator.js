@@ -2,7 +2,7 @@
 
         function render(drawCoordinates, clearCoordinates) {
             
-            var self = this;
+            let self = this;
             self.context.clearRect(
                 clearCoordinates.x,
                 clearCoordinates.y,
@@ -26,7 +26,7 @@
         }
 
         function update(){
-            var self = this;
+            let self = this;
 
             self.ticksCount += 1;
             if(self.ticksCount >= self.maxTicks) {
@@ -41,7 +41,7 @@
             return self;
         }
 
-        var sprite = {
+        let sprite = {
             spriteSheet: options.spriteSheet,
             context: options.context,
             width: options.width,
