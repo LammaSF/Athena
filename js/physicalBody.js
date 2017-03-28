@@ -11,11 +11,14 @@ function createPhysicalBody(options) {
     }
 
     function collides (body) {
-        if(this.coordinates.x === body.coordinates.x
-            && this.coordinates.y === body.coordinates.y){
+        let biggerBodySizeX = Math.abs(this.width - body.width);
+        let biggerBodySizeY = Math.abs(this.height - body.height);
+        
+        if(Math.abs(this.coordinates.x - body.coordinates.x) < biggerBodySizeX
+            && Math.abs(this.coordinates.y - body.coordinates.y) < biggerBodySizeY){
             return true;
         }
-        
+
         return false;
     }
 
