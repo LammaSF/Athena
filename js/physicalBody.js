@@ -11,7 +11,8 @@ function createPhysicalBody(options) {
     }
 
     function collides (body) {
-        if(this.coordinates.x === body.coordinates.x){
+        if(this.coordinates.x === body.coordinates.x
+            && this.coordinates.y === body.coordinates.y){
             return true;
         }
         

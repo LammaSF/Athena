@@ -1,12 +1,14 @@
-#test {
+body {
+    background-image: url('../images/background1.jpg');
+    text-align: center;
+}
+
+#wrapper {
     width: 1200px;
     height: 600px;
     margin: 0px auto;
     border: 1px solid red;
-}
-
-#test {
-    background-image: url('../images/background.jpg');
+    display: none;
 }
 
 #team-athena-text {
@@ -34,7 +36,8 @@
 }
 
 #smurfCanvas {
-    margin-top: 450px;
+    width: 1200px;
+    height: 600px;
     z-index: 10;
     position: absolute;
 }
@@ -46,4 +49,10 @@
 #background-canvas {
     z-index: 1;
     position: relative;
+}
+
+#caughtBeers {
+    display: none;
+    color: white;
+    float: left; 
 }
