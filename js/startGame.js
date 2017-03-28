@@ -31,7 +31,7 @@ function startGame() {
     let smurfBody = createPhysicalBody({
         coordinates: {
             x: 0,
-            y: 550
+            y: 500
         },
         speed: {
             x: 0,
@@ -143,11 +143,11 @@ function startGame() {
         let smurfLastCoordinates = smurfBody.move();
 
         smurfSprite.render({
-            x: 0,
-            y: 500
+            x: smurfLastCoordinates.x,
+            y: smurfLastCoordinates.y
         }, {
-                x: 0,
-                y: 500
+                x: smurfLastCoordinates.x,
+                y: smurfLastCoordinates.y
             }).update();
 
         background.render();
