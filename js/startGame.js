@@ -5,7 +5,8 @@ function startGame() {
 
     let smurfCanvas = document.getElementById('smurfCanvas'),
         smurfContext = smurfCanvas.getContext('2d'),
-        smurfSpriteSheet = document.getElementById('smurfWalkingSheet');
+        smurfSpriteSheet = document.getElementById('smurfWalkingSheet'),
+        smurfJumpingSheet = document.getElementById('smurfJumpingSheet');
 
     let $wrapper = $('#wrapper');
     $wrapper.css({
@@ -26,6 +27,20 @@ function startGame() {
         frameIndex: 0,
         imgWidth: smurfSpriteSheet.width / 6,
         imgHeight: smurfSpriteSheet.height
+    });
+
+    let smurfJumpingSprite = createSprite({
+        spritesheet: smurfJumpingSheet,
+        context: smurfContext,
+        width: smurfJumpingSheet.width / 5,
+        height: smurfJumpingSheet.height,
+        framesCount: 2,
+        maxFrames: 4,
+        maxTicks: 5,
+        elapsedFrames: 0,
+        frameIndex: 0,
+        imgWidth: smurfJumpingSheet.width / 3,
+        imgHeight: smurfJumpingSheet.height
     });
 
     let smurfBody = createPhysicalBody({
@@ -146,9 +161,9 @@ function startGame() {
             x: smurfLastCoordinates.x,
             y: smurfLastCoordinates.y
         }, {
-                x: smurfLastCoordinates.x,
-                y: smurfLastCoordinates.y
-            }).update();
+            x: smurfLastCoordinates.x,
+            y: smurfLastCoordinates.y
+        }).update();
 
         background.render();
         background.update();
