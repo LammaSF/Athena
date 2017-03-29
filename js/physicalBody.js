@@ -17,15 +17,17 @@ function createPhysicalBody(options) {
             collisionMarginY,
             collisionMarginX;
 
-        if(this.coordinates.x < body.coordinates.x) {
+        const maxRight = 1150;
+
+        if (this.coordinates.x < body.coordinates.x) {
             thisLeft = true;
-        } 
+        }
 
         if (this.coordinates.y < body.coordinates.y) {
             thisHigher = true;
         }
 
-        
+
         if (thisLeft) {
             collisionMarginX = leftTrueMarginX;
         } else {
@@ -48,6 +50,12 @@ function createPhysicalBody(options) {
         }
         if (this.coordinates.y < 0) {
             this.coordinates.y = 0
+        }
+        if (this.coordinates.x > maxRight) {
+            this.coordinates.x = maxRight;
+        }
+        if (this.coordinates.y > maxRight) {
+            this.coordinates.y = maxRight;
         }
 
         return false;
