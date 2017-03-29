@@ -1,7 +1,6 @@
 let themeSong = document.getElementById("audio");
 let drinkBeer = document.getElementById("drinkBeer");
 let inTheForet = document.getElementById("inTheForest");
-let deadSound = document.getElementById("dead");
 
 themeSong.play();
 
@@ -165,7 +164,7 @@ function startGame() {
         if (highscore !== null) {
             if (beerCounter >= highscore) {
                 localStorage.setItem("highscore", beerCounter);
-            }else {
+            } else {
                 isDead = true;
             }
 
@@ -202,7 +201,6 @@ function startGame() {
                     obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
                     beerCounter = 0;
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
-                    deadSound.play();
                     inTheForet.pause();
                     gameOver(isDead);
                     return;
