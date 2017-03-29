@@ -175,7 +175,7 @@ function startGame() {
         }
         let $highscores = $('#hightscores');
         $highscores.css('display', 'block');
-        $highscores.text('Най-висок резултат: ' + highscore);
+        $highscores.text('Най-добър резултат: ' + highscore);
 
         if (beers.length <= 7) {
             addBeer();

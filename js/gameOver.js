@@ -40,7 +40,7 @@ function gameOver(isDead, wrapper) {
 
 
   let $restartButton = $('<input type="button" value="Restart" />');
-
+    let $resetHighscore = $('<input type="button" id = "reset-btn" value="Reset High score" />');
   $restartButton.css({
     'margin': 50,
     'font-size': 35,
@@ -55,10 +55,27 @@ function gameOver(isDead, wrapper) {
     $restartButton.css('background-color', '#ab4242')
   }).on('click', function () {
     $(this).css('display', 'none');
+      $resetHighscore.css('display', 'none');
     $gameOverText.css('display', 'none');
     $winText.css('display', 'none');
     $drunkSmurfImg.css('display','none');
     $winSmurfImg.css('display','none');
     startGame();
   }).appendTo($('body'));
+
+    $resetHighscore.css({
+        'margin': 0,
+        'font-size': 35,
+        'color': 'white',
+        'border-radius': 10,
+        '-webkit-transition-duration': '0.4s',
+        'transition-duration': '0.4s',
+        'background-color': '#ab4242'
+    }).hover(function () {
+        $resetHighscore.css('background-color', '#3c151e')
+    }, function () {
+        $resetHighscore.css('background-color', '#ab4242')
+    }).on('click', function () {
+            localStorage.clear();
+    }).appendTo($('body'));
 }
