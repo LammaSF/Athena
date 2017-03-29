@@ -34,7 +34,7 @@ function gameOver(isDead, wrapper) {
     }
     else{
         $gameOverText.css('display', 'none');
-        $drunkSmurfImg.css('display','none');
+        $drunkSmurfImg.css('display', 'none');
         $winText.appendTo($('body'));
         $winSmurfImg.insertAfter($winText);
         winOne.play();
@@ -79,6 +79,6 @@ function gameOver(isDead, wrapper) {
     }, function () {
         $resetHighscore.css('background-color', '#ab4242')
     }).on('click', function () {
-            window.localStorage.clear();
+        window.localStorage.clear();
     }).appendTo($('body'));
 }
