@@ -19,7 +19,7 @@ function createPhysicalBody(options) {
         if(thisHigher) {
             collisionMarginY = 45;
         } else {
-            collisionMarginY = 25;
+            collisionMarginY = 20;
         }
 
         if (Math.abs(this.coordinates.x - body.coordinates.x) < 30 &&
