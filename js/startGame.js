@@ -7,6 +7,7 @@ function startGame() {
         smurfContext = smurfCanvas.getContext('2d'),
         smurfSpriteSheet = document.getElementById('smurfWalkingSheet'),
         smurfJumpingSheet = document.getElementById('smurfJumpingSheet');
+    console.log(smurfJumpingSheet);
 
     let $wrapper = $('#wrapper');
     $wrapper.css({
@@ -14,48 +15,55 @@ function startGame() {
         'background-image': 'url("../images/background.jpg")'
     });
 
+    function createSmurf(startingX, startingY){
+        let smurfSprite = createSprite({
+            spriteSheet: smurfSpriteSheet,
+            context: smurfContext,
+            width: smurfSpriteSheet.width / 8,
+            height: smurfSpriteSheet.height,
+            framesCount: 2,
+            maxFrames: 4,
+            maxTicks: 5,
+            elapsedFrames: 0,
+            frameIndex: 0,
+            imgWidth: smurfSpriteSheet.width / 6,
+            imgHeight: smurfSpriteSheet.height
+        });
 
-    let smurfSprite = createSprite({
-        spriteSheet: smurfSpriteSheet,
-        context: smurfContext,
-        width: smurfSpriteSheet.width / 8,
-        height: smurfSpriteSheet.height,
-        framesCount: 2,
-        maxFrames: 4,
-        maxTicks: 5,
-        elapsedFrames: 0,
-        frameIndex: 0,
-        imgWidth: smurfSpriteSheet.width / 6,
-        imgHeight: smurfSpriteSheet.height
-    });
+        let smurfJumpingSprite = createSprite({
+            spriteSheet: smurfJumpingSheet,
+            context: smurfContext,
+            width: smurfJumpingSheet.width / 5,
+            height: smurfJumpingSheet.height,
+            framesCount: 2,
+            maxFrames: 4,
+            maxTicks: 5,
+            elapsedFrames: 0,
+            frameIndex: 0,
+            imgWidth: smurfJumpingSheet.width / 3,
+            imgHeight: smurfJumpingSheet.height
+        });
+        let currentSmurfSprite = smurfSprite;
 
-    let smurfJumpingSprite = createSprite({
-        spritesheet: smurfJumpingSheet,
-        context: smurfContext,
-        width: smurfJumpingSheet.width / 5,
-        height: smurfJumpingSheet.height,
-        framesCount: 2,
-        maxFrames: 4,
-        maxTicks: 5,
-        elapsedFrames: 0,
-        frameIndex: 0,
-        imgWidth: smurfJumpingSheet.width / 3,
-        imgHeight: smurfJumpingSheet.height
-    });
+        let smurfBody = createPhysicalBody({
+            coordinates: {
+                x: startingX || 0,
+                y: startingY ||  500
+            },
+            speed: {
+                x: 0,
+                y: 0
+            },
+            height: currentSmurfSprite.imgWidth,
+            width: currentSmurfSprite.imgHeight
+        });
 
-    let smurfBody = createPhysicalBody({
-        coordinates: {
-            x: 0,
-            y: 500
-        },
-        speed: {
-            x: 0,
-            y: 0
-        },
-        height: smurfSprite.imgWidth,
-        width: smurfSprite.imgHeight
-    });
-
+        return {
+            smurfBody: smurfBody,
+            smurfSprite: smurfSprite,
+            smurfJumpingSprite: smurfJumpingSprite
+        }
+    }
     function createBeer(startingX, startingY) {
 
         let beerSprite = createSprite({
@@ -91,7 +99,6 @@ function startGame() {
         }
     }
 
-
     let beers = [];
 
     function addBeer(options) {
@@ -117,8 +124,6 @@ function startGame() {
         height: 600,
         speedX: 10
     });
-
-    let currentSmurfSprite = smurfSprite;
 
     window.addEventListener('keydown', function(ev) {
         switch (ev.keyCode) {
@@ -148,14 +153,16 @@ function startGame() {
         }
     });
 
+    let smurf = createSmurf();
+    let smurfBody = smurf.smurfBody;
+    let currentSmurfSprite = smurf.smurfSprite;
+    
     function gameLoop() {
-
 
         if (beers.length) {
             for (i = 0; i < beers.length; i += 1) {
                 let beer = beers[i];
 
-                // debugger
                 if (beer.beerBody.coordinates.x < -beer.beerBody.width) {
                     beers.splice(i, 1);
                     i -= 1;
@@ -182,24 +189,22 @@ function startGame() {
 
             }
         }
-
-        addBeer();
-
-        let smurfLastCoordinates = smurfBody.move();
-
-        if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
-            currentSmurfSprite = smurfJumpingSprite;
-        } else {
-            currentSmurfSprite = smurfSprite;
+        if(beers.length <= 7){
+            addBeer();
         }
 
+        let smurfLastCoordinates = smurfBody.move();
+        let currentSmurfSprite = smurf.currentSmurfSprite;
+        if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
+            currentSmurfSprite = smurf.smurfJumpingSprite;
+        } else {
+            currentSmurfSprite = smurf.smurfSprite;
+        }
         currentSmurfSprite.render({
-            x: smurfLastCoordinates.x,
-            y: smurfLastCoordinates.y
-        }, {
-            x: smurfLastCoordinates.x,
-            y: smurfLastCoordinates.y
-        }).update();
+            x: smurf.smurfBody.coordinates.x,
+            y: smurf.smurfBody.coordinates.y
+        }, smurfLastCoordinates).
+        update();
 
         background.render();
         background.update();
