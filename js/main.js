@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
     .css({
       "display": "block",
       "margin": "auto",
-      'width': '50%',
+      'width': '30%',
       'border': '3px solid green',
       'padding': '10px'
     });
