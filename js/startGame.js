@@ -91,17 +91,9 @@ function startGame() {
         window.addEventListener('keyup', function (ev) {
         switch (ev.keyCode) {
             case 37:
-                if (smurfBody.speed.x < 0) {
-                    return;
-                }
-
                 smurfBody.speed.x = 0;
                 break;
             case 39:
-                if (smurfBody.speed.x > 0) {
-                    return;
-                }
-
                 smurfBody.speed.x = 0;
                 break;
             default:
