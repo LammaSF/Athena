@@ -19,7 +19,7 @@ function createObstacle(obstacleContext, obstacleSpriteSheet, startingX, startin
                 y: startingY || 400
             },
             speed: {
-                x: -3,
+                x: -2,
                 y: 0
             },
             height: obstacleSpriteSheet.width,

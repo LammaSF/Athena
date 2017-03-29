@@ -14,34 +14,28 @@ function createPhysicalBody(options) {
 
         let thisHigher = false,
             collisionMarginY;
-        if (this.coordinates.y - body.coordinates.y) {
+
+        if (this.coordinates.y < body.coordinates.y) {
             thisHigher = true;
         }
-        if (thisHigher) {
-            collisionMarginY = 45;
-        } else {
-            collisionMarginY = 20;
-        }
 
-        if (this.coordinates.y - body.coordinates.y) {
-            thisHigher = true;
-        }
         if (thisHigher) {
-            collisionMarginY = 45;
+            collisionMarginY = 51;
         } else {
-            collisionMarginY = 20;
+            collisionMarginY = 40;
         }
+        // console.log(body.coordinates.y);
 
-        if (Math.abs(this.coordinates.x - body.coordinates.x) < 30 &&
+        if (Math.abs(this.coordinates.x - body.coordinates.x) < 40 &&
             Math.abs(this.coordinates.y - body.coordinates.y) < collisionMarginY) {
             return true;
         }
-        if (this.coordinates.x < 0) {
-            this.coordinates.x = 0;
-        }
-        if (this.coordinates.y < 0) {
-            this.coordinates.y = 0
-        }
+        // if (this.coordinates.x < 0) {
+        //     this.coordinates.x = 0;
+        // }
+        // if (this.coordinates.y < 0) {
+        //     this.coordinates.y = 0
+        // }
 
         return false;
     }

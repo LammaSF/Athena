@@ -37,7 +37,7 @@ function startGame() {
     let obstacles = [];
 
     function addObstacle() {
-        let startingX = getRandomArbitrary(300, 500);
+        let startingX = getRandomArbitrary(300, 800);
         let startingY = 400;
 
         if (obstacles.length) {
@@ -67,7 +67,7 @@ function startGame() {
                     return;
                 }
 
-                smurfBody.speed.x -= 2;
+                smurfBody.speed.x -= 5;
                 break;
             case 38:
                 if (smurfBody.coordinates.y < (smurfCanvas.height - smurfBody.height)) {
