@@ -118,6 +118,36 @@ function startGame() {
         speedX: 10
     });
 
+    let currentSmurfSprite = smurfSprite;
+
+    window.addEventListener('keydown', function(ev) {
+        switch (ev.keyCode) {
+            case 37:
+                if (smurfBody.speed.x < 0) {
+                    return;
+                }
+
+                smurfBody.coordinates.x -= 5;
+                break;
+            case 38:
+                if (smurfBody.coordinates.y < (smurfCanvas.height - smurfBody.height)) {
+                    return;
+                }
+
+                smurfBody.coordinates.y -= 5;
+                break;
+            case 39:
+                if (smurfBody.speed.x > 0) {
+                    return;
+                }
+
+                smurfBody.coordinates.x += 5;
+                break;
+            default:
+                break;
+        }
+    });
+
     function gameLoop() {
 
 
@@ -157,7 +187,13 @@ function startGame() {
 
         let smurfLastCoordinates = smurfBody.move();
 
-        smurfSprite.render({
+        if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
+            currentSmurfSprite = smurfJumpingSprite;
+        } else {
+            currentSmurfSprite = smurfSprite;
+        }
+
+        currentSmurfSprite.render({
             x: smurfLastCoordinates.x,
             y: smurfLastCoordinates.y
         }, {
