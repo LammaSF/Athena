@@ -8,6 +8,10 @@ function startGame() {
         smurfSpriteSheet = document.getElementById('smurfWalkingSheet'),
         smurfJumpingSheet = document.getElementById('smurfJumpingSheet');
 
+    let obstacleCanvas = document.getElementById('obstacleCanvas')
+    obstacleContext = obstacleCanvas.getContext('2d'),
+        obstacleSpriteSheet = document.getElementById('obstacle');
+
     let $wrapper = $('#wrapper');
     $wrapper.css({
         'display': 'block',
@@ -27,6 +31,22 @@ function startGame() {
             beers.push(newBeer);
         } else {
             beers.push(createBeer(beerContext, beerSpriteSheet, 1200, startingY));
+        }
+    }
+
+    let obstacles = [];
+
+    function addObstacle() {
+        let startingX = getRandomArbitrary(300, 500);
+        let startingY = 400;
+
+        if (obstacles.length) {
+            let lastObstacle = obstacles[obstacles.length - 1];
+            startingX += lastObstacle.obstacleBody.coordinates.x;
+            let newObstacle = createObstacle(obstacleContext, obstacleSpriteSheet, startingX, startingY);
+            obstacles.push(newObstacle);
+        } else {
+            obstacles.push(createObstacle(obstacleContext, obstacleSpriteSheet, 1200, startingY));
         }
     }
 
@@ -101,16 +121,40 @@ function startGame() {
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
                     continue;
                 }
-
             }
         }
         if (beers.length <= 7) {
             addBeer();
         }
 
+        if (obstacles.length) {
+            for (i = 0; i < obstacles.length; i += 1) {
+                let obstacle = obstacles[i];
+// debugger
+
+                if (obstacle.obstacleBody.coordinates.x < -obstacle.obstacleBody.width) {
+                    console.log('enter');
+                    obstacles.splice(i, 1);
+                    i -= 1;
+                    continue;
+                }
+
+                let obstacleLastCoordinates = obstacle.obstacleBody.move();
+
+                obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
+
+                if (smurfBody.collides(obstacle.obstacleBody)) {
+                    console.log('break');
+                }
+            }
+        }
+        if (obstacles.length <= 5) {
+            addObstacle();
+        }
+
         let smurfLastCoordinates = smurfBody.move();
         smurfLastCoordinates.x -= 5;
-        
+
         let currentSmurfSprite = smurf.currentSmurfSprite;
         if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
             currentSmurfSprite = smurf.smurfJumpingSprite;

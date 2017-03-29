@@ -28,6 +28,10 @@ body {
     display: none;
 }
 
+#obstacle {
+    display: none;
+}
+
 #beerCanvas {
     width: 1200px;
     height: 600px;
@@ -36,6 +40,13 @@ body {
 }
 
 #smurfCanvas {
+    width: 1200px;
+    height: 600px;
+    z-index: 10;
+    position: absolute;
+}
+
+#obstacleCanvas {
     width: 1200px;
     height: 600px;
     z-index: 10;
