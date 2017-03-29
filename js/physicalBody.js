@@ -18,6 +18,12 @@ function createPhysicalBody(options) {
             Math.abs(this.coordinates.y - body.coordinates.y) < biggerBodySizeY) {
             return true;
         }
+        if (this.coordinates.x<0) {
+            this.coordinates.x=0;
+        }
+        if (this.coordinates.y<0) {
+            this.coordinates.y=0
+        }
 
         return false;
     }
