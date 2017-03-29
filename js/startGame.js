@@ -1,4 +1,14 @@
+var themeSong = document.getElementById("audio");
+var drinkBeer = document.getElementById("drinkBeer");
+var inTheForet = document.getElementById("inTheForest");
+var deadSound = document.getElementById("dead");
+
+themeSong.play();
+
 function startGame() {
+    themeSong.pause();
+    inTheForet.play();
+
     let beerCanvas = document.getElementById('beerCanvas'),
         beerContext = beerCanvas.getContext('2d'),
         beerSpriteSheet = document.getElementById('beerSpriteSheet');
@@ -28,6 +38,7 @@ function startGame() {
 
             let startingX = lastBeer.beerBody.coordinates.x + 300;
             let newBeer = createBeer(beerContext, beerSpriteSheet, startingX, startingY);
+
             beers.push(newBeer);
         } else {
             beers.push(createBeer(beerContext, beerSpriteSheet, 1200, startingY));
@@ -60,7 +71,7 @@ function startGame() {
         speedX: 10
     });
 
-    window.addEventListener('keydown', function (ev) {
+    window.addEventListener('keydown', function(ev) {
         switch (ev.keyCode) {
             case 37:
                 if (smurfBody.speed.x < 0) {
@@ -85,7 +96,7 @@ function startGame() {
         }
     });
 
-        window.addEventListener('keyup', function (ev) {
+    window.addEventListener('keyup', function(ev) {
         switch (ev.keyCode) {
             case 37:
                 smurfBody.speed.x = 0;
@@ -106,8 +117,7 @@ function startGame() {
 
         if (physicalBody.coordinates.y === 500) {
             return;
-        }
-        else if (physicalBody.coordinates.y > 500) {
+        } else if (physicalBody.coordinates.y > 500) {
             physicalBody.coordinates.y = 500;
             physicalBody.speed.y = 0;
             return;
@@ -143,6 +153,7 @@ function startGame() {
                     beers.splice(i, 1);
                     i -= 1;
                     beerCounter += 1;
+                    drinkBeer.play();
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
                     continue;
                 }
@@ -155,8 +166,7 @@ function startGame() {
             if (beerCounter > highscore) {
                 localStorage.setItem("highscore", beerCounter);
             }
-        }
-        else {
+        } else {
             localStorage.setItem("highscore", beerCounter);
         }
         let $highscores = $('#hightscores');
@@ -188,6 +198,8 @@ function startGame() {
                     obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
                     beerCounter = 0;
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
+                    deadSound.play();
+                    inTheForet.pause();
                     gameOver();
                     return;
                 }
@@ -210,7 +222,7 @@ function startGame() {
             x: smurf.smurfBody.coordinates.x,
             y: smurf.smurfBody.coordinates.y
         }, smurfLastCoordinates).
-            update();
+        update();
 
         background.render();
         background.update();
