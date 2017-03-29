@@ -11,7 +11,6 @@ function createPhysicalBody(options) {
     }
 
     function collides(body) {
-<<<<<<< HEAD
 
         let thisHigher = false,
                        collisionMarginY;
@@ -24,19 +23,7 @@ function createPhysicalBody(options) {
                        collisionMarginY = 20;
                    }
 
-=======
-        let thisHigher = false,
-            collisionMarginY;
-        if(this.coordinates.y - body.coordinates.y) {
-            thisHigher = true;
-        }
-        if(thisHigher) {
-            collisionMarginY = 45;
-        } else {
-            collisionMarginY = 20;
-        }
 
->>>>>>> origin/master
         if (Math.abs(this.coordinates.x - body.coordinates.x) < 30 &&
             Math.abs(this.coordinates.y - body.coordinates.y) < collisionMarginY) {
             return true;
