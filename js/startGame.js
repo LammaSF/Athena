@@ -38,7 +38,7 @@ function startGame() {
 
     function addObstacle() {
         let startingX = getRandomArbitrary(300, 800);
-        let startingY = 470;
+        let startingY = 465;
 
         if (obstacles.length) {
             let lastObstacle = obstacles[obstacles.length - 1];
@@ -133,7 +133,7 @@ function startGame() {
 
                 beer.beerSprite.render(beer.beerBody.coordinates, beerLastCoordinates).update();
 
-                if (smurfBody.collides(beer.beerBody, 43, 30, 51, 40)) {
+                if (smurfBody.collides(beer.beerBody, 41, 31, 51, 41)) {
                     beerContext.clearRect(
                         beer.beerBody.coordinates.x,
                         beer.beerBody.coordinates.y,
@@ -182,10 +182,12 @@ function startGame() {
 
                 obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
 
-                if (smurfBody.collides(obstacle.obstacleBody, 43, 80, 51, 65)) {
+                if (smurfBody.collides(obstacle.obstacleBody, 43, 60, 50, 65)) {
                     beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
                     smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
                     obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
+                    beerCounter = 0;
+                    $caughtBeers.text('Хванати бири: ' + beerCounter);
                     gameOver();
                     return;
                 }
