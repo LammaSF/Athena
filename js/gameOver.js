@@ -1,20 +1,43 @@
-function gameOver(wrapper, points) {
+function gameOver(isDead, wrapper) {
     let $wrapper = $('#wrapper');
     $wrapper.css('display', 'none');
-
     let $gameOverText = $('<p>GAME OVER</p>')
         .css({
             'font-size': 50,
             'color': 'red'
-        })
-        .appendTo($('body'));
-
+        });
     let $drunkSmurfImg = $('#gameOver')
         .css({
             'display': 'block',
             'margin': 'auto'
-        })
-        .insertAfter($gameOverText);
+        });
+    let $winSmurfImg = $('#win')
+        .css({
+            'display': 'block',
+            'margin': 'auto'
+        });
+    let $winText = $('<p>Поздравления! Подобри рекорда!</p>')
+        .css({
+            'font-size': 50,
+            'color': 'red'
+        });
+    if (isDead) {
+
+            $winText.css('display', 'none');
+            $winSmurfImg.css('display','none');
+            $gameOverText.appendTo($('body'));
+            $drunkSmurfImg.insertAfter($gameOverText);
+
+
+
+    }
+    else{
+        $gameOverText.css('display', 'none');
+        $drunkSmurfImg.css('display','none');
+        $winText.appendTo($('body'));
+        $winSmurfImg.insertAfter($winText);
+    }
+
 
   let $restartButton = $('<input type="button" value="Restart" />');
 
@@ -33,7 +56,9 @@ function gameOver(wrapper, points) {
   }).on('click', function () {
     $(this).css('display', 'none');
     $gameOverText.css('display', 'none');
+    $winText.css('display', 'none');
     $drunkSmurfImg.css('display','none');
+    $winSmurfImg.css('display','none');
     startGame();
   }).appendTo($('body'));
 }

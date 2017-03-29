@@ -11,7 +11,7 @@ body {
     display: none;
 }
 
-#team-athena-text {
+.team-athena-text {
     text-align: center;
     font-size: 25px;
     font-weight: bold;
@@ -72,6 +72,9 @@ body {
     display: none;
 }
 #gameOver {
+     display: none;
+ }
+#win {
     display: none;
 }
 #hightscores {

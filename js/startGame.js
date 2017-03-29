@@ -1,7 +1,7 @@
-var themeSong = document.getElementById("audio");
-var drinkBeer = document.getElementById("drinkBeer");
-var inTheForet = document.getElementById("inTheForest");
-var deadSound = document.getElementById("dead");
+let themeSong = document.getElementById("audio");
+let drinkBeer = document.getElementById("drinkBeer");
+let inTheForet = document.getElementById("inTheForest");
+let deadSound = document.getElementById("dead");
 
 themeSong.play();
 
@@ -160,14 +160,18 @@ function startGame() {
             }
         }
 
-        var highscore = localStorage.getItem("highscore");
-
+        let highscore = localStorage.getItem("highscore");
+        let isDead = false;
         if (highscore !== null) {
-            if (beerCounter > highscore) {
+            if (beerCounter >= highscore) {
                 localStorage.setItem("highscore", beerCounter);
+            }else {
+                isDead = true;
             }
+
         } else {
             localStorage.setItem("highscore", beerCounter);
+
         }
         let $highscores = $('#hightscores');
         $highscores.css('display', 'block');
@@ -200,7 +204,7 @@ function startGame() {
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
                     deadSound.play();
                     inTheForet.pause();
-                    gameOver();
+                    gameOver(isDead);
                     return;
                 }
             }

@@ -58,7 +58,7 @@
             update: update,
             imgWidth: options.imgWidth,
             imgHeight: options.imgHeight
-        }
+        };
 
         return sprite;
     }

@@ -8,7 +8,6 @@ window.addEventListener('load', function () {
       "display": "block",
       "margin": "auto",
       'width': '30%',
-      'border': '3px solid green',
       'padding': '10px'
     });
 
