@@ -158,11 +158,20 @@ function startGame() {
                 obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
 
                 if (smurfBody.collides(obstacle.obstacleBody)) {
+<<<<<<< HEAD
                     beerContext.clearRect(0,0,beerCanvas.width, beerCanvas.height);
                     smurfContext.clearRect(0,0, smurfCanvas.width, smurfCanvas.height);
                     obstacleContext.clearRect(0,0,obstacleCanvas.width, obstacleCanvas.height);
                    gameOver();
                     return;
+=======
+                    // beerContext.clearRect(0,0,beerCanvas.width, beerCanvas.height);
+                    // smurfContext.clearRect(0,0, smurfCanvas.width, smurfCanvas.height);
+                    // obstacleContext.clearRect(0,0,obstacleCanvas.width, obstacleCanvas.height);
+                    // console.log(beerCounter);
+                    // gameOver(beerCounter);
+                    // return;
+>>>>>>> origin/master
                 }
             }
         }
