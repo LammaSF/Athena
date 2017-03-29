@@ -38,7 +38,7 @@ function startGame() {
 
     function addObstacle() {
         let startingX = getRandomArbitrary(300, 800);
-        let startingY = 400;
+        let startingY = 470;
 
         if (obstacles.length) {
             let lastObstacle = obstacles[obstacles.length - 1];
@@ -66,22 +66,19 @@ function startGame() {
                 if (smurfBody.speed.x < 0) {
                     return;
                 }
-
-                smurfBody.speed.x -= 5;
+                smurfBody.speed.x -= 6;
                 break;
             case 38:
                 if (smurfBody.coordinates.y < (smurfCanvas.height - smurfBody.height)) {
                     return;
                 }
-
-                smurfBody.speed.y -= 12;
+                smurfBody.speed.y -= 13;
                 break;
             case 39:
                 if (smurfBody.speed.x > 0) {
                     return;
                 }
-
-                smurfBody.speed.x += 2;
+                smurfBody.speed.x += 4;
                 break;
             default:
                 break;
@@ -120,7 +117,7 @@ function startGame() {
 
     function gameLoop() {
 
-        applyGravity(smurfBody, 0.5);
+        applyGravity(smurfBody, 0.7);
 
         if (beers.length) {
             for (i = 0; i < beers.length; i += 1) {
@@ -136,7 +133,7 @@ function startGame() {
 
                 beer.beerSprite.render(beer.beerBody.coordinates, beerLastCoordinates).update();
 
-                if (smurfBody.collides(beer.beerBody)) {
+                if (smurfBody.collides(beer.beerBody, 43, 30, 51, 40)) {
                     beerContext.clearRect(
                         beer.beerBody.coordinates.x,
                         beer.beerBody.coordinates.y,
@@ -185,13 +182,12 @@ function startGame() {
 
                 obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
 
-                if (smurfBody.collides(obstacle.obstacleBody)) {
-
-                    // beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
-                    // smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
-                    // obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
-                    // gameOver();
-                    // return;
+                if (smurfBody.collides(obstacle.obstacleBody, 43, 80, 51, 65)) {
+                    beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
+                    smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
+                    obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
+                    gameOver();
+                    return;
                 }
             }
         }

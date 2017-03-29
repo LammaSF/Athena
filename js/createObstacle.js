@@ -9,8 +9,8 @@ function createObstacle(obstacleContext, obstacleSpriteSheet, startingX, startin
             maxTicks: 0,
             elapsedFrames: 0,
             frameIndex: 0,
-            imgWidth: obstacleSpriteSheet.width,
-            imgHeight: obstacleSpriteSheet.height
+            imgWidth: obstacleSpriteSheet.width / 1.5,
+            imgHeight: obstacleSpriteSheet.height / 1.5
         });
 
         let obstacleBody = createPhysicalBody({
