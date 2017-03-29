@@ -71,3 +71,6 @@ body {
 #smurfJumpingSheet {
     display: none;
 }
+#gameOver {
+    display: none;
+}

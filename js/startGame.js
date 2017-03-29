@@ -8,8 +8,8 @@ function startGame() {
         smurfSpriteSheet = document.getElementById('smurfWalkingSheet'),
         smurfJumpingSheet = document.getElementById('smurfJumpingSheet');
 
-    let obstacleCanvas = document.getElementById('obstacleCanvas')
-    obstacleContext = obstacleCanvas.getContext('2d'),
+    let obstacleCanvas = document.getElementById('obstacleCanvas'),
+        obstacleContext = obstacleCanvas.getContext('2d'),
         obstacleSpriteSheet = document.getElementById('obstacle');
 
     let $wrapper = $('#wrapper');
@@ -133,7 +133,6 @@ function startGame() {
 // debugger
 
                 if (obstacle.obstacleBody.coordinates.x < -obstacle.obstacleBody.width) {
-                    console.log('enter');
                     obstacles.splice(i, 1);
                     i -= 1;
                     continue;
@@ -144,7 +143,11 @@ function startGame() {
                 obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
 
                 if (smurfBody.collides(obstacle.obstacleBody)) {
-                    console.log('break');
+                    beerContext.clearRect(0,0,beerCanvas.width, beerCanvas.height);
+                    smurfContext.clearRect(0,0, smurfCanvas.width, smurfCanvas.height);
+                    obstacleContext.clearRect(0,0,obstacleCanvas.width, obstacleCanvas.height);
+                    gameOver();
+                    return;
                 }
             }
         }
