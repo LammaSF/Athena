@@ -1,3 +1,6 @@
+let deadSound = document.getElementById("dead");
+let winOne = document.getElementById("winOne");
+
 function gameOver(isDead, wrapper) {
     let $wrapper = $('#wrapper');
     $wrapper.css('display', 'none');
@@ -23,42 +26,42 @@ function gameOver(isDead, wrapper) {
         });
     if (isDead) {
 
-            $winText.css('display', 'none');
-            $winSmurfImg.css('display','none');
-            $gameOverText.appendTo($('body'));
-            $drunkSmurfImg.insertAfter($gameOverText);
+        $winText.css('display', 'none');
+        $winSmurfImg.css('display', 'none');
+        $gameOverText.appendTo($('body'));
+        $drunkSmurfImg.insertAfter($gameOverText);
+        deadSound.play();
 
 
-
-    }
-    else{
+    } else {
         $gameOverText.css('display', 'none');
-        $drunkSmurfImg.css('display','none');
+        $drunkSmurfImg.css('display', 'none');
         $winText.appendTo($('body'));
         $winSmurfImg.insertAfter($winText);
+        winOne.play();
     }
 
 
-  let $restartButton = $('<input type="button" value="Restart" />');
+    let $restartButton = $('<input type="button" value="Restart" />');
 
-  $restartButton.css({
-    'margin': 50,
-    'font-size': 35,
-    'color': 'white',
-    'border-radius': 10,
-    '-webkit-transition-duration': '0.4s',
-    'transition-duration': '0.4s',
-    'background-color': '#ab4242'
-  }).hover(function () {
-    $restartButton.css('background-color', '#3c151e')
-  }, function () {
-    $restartButton.css('background-color', '#ab4242')
-  }).on('click', function () {
-    $(this).css('display', 'none');
-    $gameOverText.css('display', 'none');
-    $winText.css('display', 'none');
-    $drunkSmurfImg.css('display','none');
-    $winSmurfImg.css('display','none');
-    startGame();
-  }).appendTo($('body'));
+    $restartButton.css({
+        'margin': 50,
+        'font-size': 35,
+        'color': 'white',
+        'border-radius': 10,
+        '-webkit-transition-duration': '0.4s',
+        'transition-duration': '0.4s',
+        'background-color': '#ab4242'
+    }).hover(function() {
+        $restartButton.css('background-color', '#3c151e')
+    }, function() {
+        $restartButton.css('background-color', '#ab4242')
+    }).on('click', function() {
+        $(this).css('display', 'none');
+        $gameOverText.css('display', 'none');
+        $winText.css('display', 'none');
+        $drunkSmurfImg.css('display', 'none');
+        $winSmurfImg.css('display', 'none');
+        startGame();
+    }).appendTo($('body'));
 }
