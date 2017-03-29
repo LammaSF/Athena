@@ -74,3 +74,9 @@ body {
 #gameOver {
     display: none;
 }
+#hightscores {
+    display: none;
+    color: white;
+    float: left;
+    margin-left: 50px;
+}

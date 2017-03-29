@@ -123,6 +123,21 @@ function startGame() {
                 }
             }
         }
+
+        var highscore = localStorage.getItem("highscore");
+
+        if(highscore !== null){
+            if (beerCounter > highscore) {
+                localStorage.setItem("highscore", beerCounter);
+            }
+        }
+        else{
+            localStorage.setItem("highscore", beerCounter);
+        }
+        let $highscores = $('#hightscores');
+        $highscores.css('display', 'block');
+        $highscores.text('Най-висок резултат: ' + highscore);
+
         if (beers.length <= 7) {
             addBeer();
         }
@@ -146,7 +161,7 @@ function startGame() {
                     beerContext.clearRect(0,0,beerCanvas.width, beerCanvas.height);
                     smurfContext.clearRect(0,0, smurfCanvas.width, smurfCanvas.height);
                     obstacleContext.clearRect(0,0,obstacleCanvas.width, obstacleCanvas.height);
-                    gameOver();
+                   gameOver();
                     return;
                 }
             }

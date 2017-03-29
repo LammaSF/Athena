@@ -11,11 +11,20 @@ function createPhysicalBody(options) {
     }
 
     function collides(body) {
-        let biggerBodySizeX = Math.abs(this.width - body.width);
-        let biggerBodySizeY = Math.abs(this.height - body.height);
 
-        if (Math.abs(this.coordinates.x - body.coordinates.x) < biggerBodySizeX &&
-            Math.abs(this.coordinates.y - body.coordinates.y) < biggerBodySizeY) {
+        let thisHigher = false,
+                       collisionMarginY;
+             if(this.coordinates.y - body.coordinates.y) {
+                      thisHigher = true;
+                  }
+              if(thisHigher) {
+                       collisionMarginY = 45;
+             } else {
+                       collisionMarginY = 20;
+                   }
+
+        if (Math.abs(this.coordinates.x - body.coordinates.x) < 30 &&
+            Math.abs(this.coordinates.y - body.coordinates.y) < collisionMarginY) {
             return true;
         }
         if (this.coordinates.x<0) {
@@ -35,7 +44,7 @@ function createPhysicalBody(options) {
         width: options.width,
         move: move,
         collides: collides
-    }
+    };
 
     return physicalBody;
 }
