@@ -67,21 +67,42 @@ function startGame() {
                     return;
                 }
 
-                smurfBody.coordinates.x -= 5;
+                smurfBody.speed.x -= 2;
                 break;
             case 38:
                 if (smurfBody.coordinates.y < (smurfCanvas.height - smurfBody.height)) {
                     return;
                 }
 
-                smurfBody.coordinates.y -= 5;
+                smurfBody.speed.y -= 12;
                 break;
             case 39:
                 if (smurfBody.speed.x > 0) {
                     return;
                 }
 
-                smurfBody.coordinates.x += 5;
+                smurfBody.speed.x += 2;
+                break;
+            default:
+                break;
+        }
+    });
+
+        window.addEventListener('keyup', function (ev) {
+        switch (ev.keyCode) {
+            case 37:
+                if (smurfBody.speed.x < 0) {
+                    return;
+                }
+
+                smurfBody.speed.x = 0;
+                break;
+            case 39:
+                if (smurfBody.speed.x > 0) {
+                    return;
+                }
+
+                smurfBody.speed.x = 0;
                 break;
             default:
                 break;
@@ -92,7 +113,22 @@ function startGame() {
     let smurfBody = smurf.smurfBody;
     let currentSmurfSprite = smurf.smurfSprite;
 
+    function applyGravity(physicalBody, gravity) {
+
+        if (physicalBody.coordinates.y === 500) {
+            return;
+        }
+        else if (physicalBody.coordinates.y > 500) {
+            physicalBody.coordinates.y = 500;
+            physicalBody.speed.y = 0;
+            return;
+        }
+        physicalBody.speed.y += gravity;
+    }
+
     function gameLoop() {
+
+        applyGravity(smurfBody, 0.5);
 
         if (beers.length) {
             for (i = 0; i < beers.length; i += 1) {
@@ -126,12 +162,12 @@ function startGame() {
 
         var highscore = localStorage.getItem("highscore");
 
-        if(highscore !== null){
+        if (highscore !== null) {
             if (beerCounter > highscore) {
                 localStorage.setItem("highscore", beerCounter);
             }
         }
-        else{
+        else {
             localStorage.setItem("highscore", beerCounter);
         }
         let $highscores = $('#hightscores');
@@ -145,7 +181,7 @@ function startGame() {
         if (obstacles.length) {
             for (i = 0; i < obstacles.length; i += 1) {
                 let obstacle = obstacles[i];
-// debugger
+                // debugger
 
                 if (obstacle.obstacleBody.coordinates.x < -obstacle.obstacleBody.width) {
                     obstacles.splice(i, 1);
@@ -159,19 +195,11 @@ function startGame() {
 
                 if (smurfBody.collides(obstacle.obstacleBody)) {
 
-                    beerContext.clearRect(0,0,beerCanvas.width, beerCanvas.height);
-                    smurfContext.clearRect(0,0, smurfCanvas.width, smurfCanvas.height);
-                    obstacleContext.clearRect(0,0,obstacleCanvas.width, obstacleCanvas.height);
-                   gameOver();
-                    return;
-
-                    //beerContext.clearRect(0,0,beerCanvas.width, beerCanvas.height);
-                    // smurfContext.clearRect(0,0, smurfCanvas.width, smurfCanvas.height);
-                    // obstacleContext.clearRect(0,0,obstacleCanvas.width, obstacleCanvas.height);
-                    // console.log(beerCounter);
-                    // gameOver(beerCounter);
+                    // beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
+                    // smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
+                    // obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
+                    // gameOver();
                     // return;
-
                 }
             }
         }

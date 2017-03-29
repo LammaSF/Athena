@@ -3,11 +3,13 @@
         function render(drawCoordinates, clearCoordinates) {
             
             let self = this;
+            let clearOffset = 50;
+
             self.context.clearRect(
-                clearCoordinates.x,
-                clearCoordinates.y,
-                self.width,
-                self.height
+                clearCoordinates.x - clearOffset,
+                clearCoordinates.y - clearOffset,
+                self.width + clearOffset,
+                self.height + clearOffset * 2
             );
 
             self.context.drawImage(

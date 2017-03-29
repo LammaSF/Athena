@@ -13,26 +13,34 @@ function createPhysicalBody(options) {
     function collides(body) {
 
         let thisHigher = false,
-                       collisionMarginY;
-             if(this.coordinates.y - body.coordinates.y) {
-                      thisHigher = true;
-                  }
-              if(thisHigher) {
-                       collisionMarginY = 45;
-             } else {
-                       collisionMarginY = 20;
-                   }
+            collisionMarginY;
+        if (this.coordinates.y - body.coordinates.y) {
+            thisHigher = true;
+        }
+        if (thisHigher) {
+            collisionMarginY = 45;
+        } else {
+            collisionMarginY = 20;
+        }
 
+        if (this.coordinates.y - body.coordinates.y) {
+            thisHigher = true;
+        }
+        if (thisHigher) {
+            collisionMarginY = 45;
+        } else {
+            collisionMarginY = 20;
+        }
 
         if (Math.abs(this.coordinates.x - body.coordinates.x) < 30 &&
             Math.abs(this.coordinates.y - body.coordinates.y) < collisionMarginY) {
             return true;
         }
-        if (this.coordinates.x<0) {
-            this.coordinates.x=0;
+        if (this.coordinates.x < 0) {
+            this.coordinates.x = 0;
         }
-        if (this.coordinates.y<0) {
-            this.coordinates.y=0
+        if (this.coordinates.y < 0) {
+            this.coordinates.y = 0
         }
 
         return false;
