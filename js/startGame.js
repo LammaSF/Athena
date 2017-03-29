@@ -109,6 +109,8 @@ function startGame() {
         }
 
         let smurfLastCoordinates = smurfBody.move();
+        smurfLastCoordinates.x -= 5;
+        
         let currentSmurfSprite = smurf.currentSmurfSprite;
         if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
             currentSmurfSprite = smurf.smurfJumpingSprite;
