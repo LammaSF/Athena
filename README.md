@@ -12,7 +12,6 @@
  5. Encho Enevski - encho.enevski
  6. Simeon_Gerginov - Симеон Гергинов
  7. Petar.Yanev - Петър Янев
- 8. DarkDawn - Иван Иванов
 
 ## GitHub repository
 https://github.com/LammaSF/Athena
