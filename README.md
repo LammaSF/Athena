@@ -1,4 +1,4 @@
-# Team "Athenae", teamwork project - "The Drunken Smurf"
+# Team "Athena", teamwork project - "The Drunken Smurf"
 # Javascript UI and DOM - March, 2017
 ----------------------------------
 ![smurfGG](./MDFileImg/smurfGG.jpg)
