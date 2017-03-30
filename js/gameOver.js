@@ -1,5 +1,6 @@
 let deadSound = document.getElementById("dead");
 let winOne = document.getElementById("winOne");
+ inTheForet = document.getElementById("inTheForest");
 
 function gameOver(isDead, wrapper) {
     let $wrapper = $('#wrapper');
@@ -72,6 +73,7 @@ function gameOver(isDead, wrapper) {
         $drunkSmurfImg.css('display', 'none');
         $winSmurfImg.css('display', 'none');
         winOne.pause();
+        inTheForet.play();
         startGame();
     }).appendTo($('body'));
 
@@ -89,7 +91,7 @@ function gameOver(isDead, wrapper) {
         $resetHighscore.css('background-color', '#ab4242')
     }).on('click', function (e) {
         window.localStorage.clear();
-        var target = e.target;
+        let target = e.target;
             target.setAttribute('data-toggle', 'modal');
             target.setAttribute('data-target', '#myModal');
     }).appendTo($('body'));
