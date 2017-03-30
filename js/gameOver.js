@@ -27,12 +27,11 @@ function gameOver(isDead, wrapper) {
     if (isDead) {
 
         $winText.css('display', 'none');
-        $winSmurfImg.css('display','none');
+        $winSmurfImg.css('display', 'none');
         $gameOverText.appendTo($('body'));
         $drunkSmurfImg.insertAfter($gameOverText);
         deadSound.play();
-    }
-    else{
+    } else {
         $gameOverText.css('display', 'none');
         $drunkSmurfImg.css('display', 'none');
         $winText.appendTo($('body'));
@@ -52,17 +51,18 @@ function gameOver(isDead, wrapper) {
         '-webkit-transition-duration': '0.4s',
         'transition-duration': '0.4s',
         'background-color': '#ab4242'
-    }).hover(function () {
+    }).hover(function() {
         $restartButton.css('background-color', '#3c151e')
-    }, function () {
+    }, function() {
         $restartButton.css('background-color', '#ab4242')
-    }).on('click', function () {
+    }).on('click', function() {
         $(this).css('display', 'none');
         $resetHighscore.css('display', 'none');
         $gameOverText.css('display', 'none');
         $winText.css('display', 'none');
-        $drunkSmurfImg.css('display','none');
-        $winSmurfImg.css('display','none');
+        $drunkSmurfImg.css('display', 'none');
+        $winSmurfImg.css('display', 'none');
+        winOne.pause();
         startGame();
     }).appendTo($('body'));
 
@@ -74,11 +74,11 @@ function gameOver(isDead, wrapper) {
         '-webkit-transition-duration': '0.4s',
         'transition-duration': '0.4s',
         'background-color': '#ab4242'
-    }).hover(function () {
+    }).hover(function() {
         $resetHighscore.css('background-color', '#3c151e')
-    }, function () {
+    }, function() {
         $resetHighscore.css('background-color', '#ab4242')
-    }).on('click', function () {
+    }).on('click', function() {
         window.localStorage.clear();
     }).appendTo($('body'));
 }
