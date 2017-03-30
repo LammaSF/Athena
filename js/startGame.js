@@ -29,7 +29,7 @@ function startGame() {
     function addBeer() {
 
         let startingY = getRandomArbitrary((GAMEHEIGHT / 2) + 50, GAMEHEIGHT - 50);
-        //////////////////////////
+
         if (beers.length) {
             let lastBeer = beers[beers.length - 1];
 
@@ -174,6 +174,8 @@ function startGame() {
                             smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
                             beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
                             obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
+                            beerCounter = 0;
+                            $caughtBeers.text('Хванати бири: ' + beerCounter);                    
                             gameOver(isDead);
                             return;
                         }
