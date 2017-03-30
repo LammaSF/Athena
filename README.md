@@ -18,7 +18,7 @@
 https://github.com/LammaSF/Athena
 
 ## Telerik Academy Showcase System place
-http://best.telerikacademy.com/
+http://best.telerikacademy.com/projects/571/Team-Athena-The-Drunken-Smurf-Teamwork-project
 
 ## The game
 https://lammasf.github.io/Athena/
