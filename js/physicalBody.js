@@ -10,7 +10,7 @@ function createPhysicalBody(options) {
         return lastCoordinates;
     }
 
-    function collides(body, leftTrueMarginX, leftFalseMarginX, higherTrueMarginY, higherFalseMarginY) {
+    function collides(options) {
 
         let thisHigher = false,
             thisLeft = false,
@@ -18,31 +18,28 @@ function createPhysicalBody(options) {
             collisionMarginX;
 
         const maxRight = 1150;
-
-        if (this.coordinates.x < body.coordinates.x) {
+        if (this.coordinates.x < options.body.coordinates.x) {
             thisLeft = true;
         }
 
-        if (this.coordinates.y < body.coordinates.y) {
+        if (this.coordinates.y < options.body.coordinates.y) {
             thisHigher = true;
         }
 
-
         if (thisLeft) {
-            collisionMarginX = leftTrueMarginX;
+            collisionMarginX = options.leftTrueMarginX;
         } else {
-            collisionMarginX = leftFalseMarginX;
+            collisionMarginX = options.leftFalseMarginX;
         }
 
         if (thisHigher) {
-            collisionMarginY = higherTrueMarginY;
+            collisionMarginY = options.higherTrueMarginY;
         } else {
-            collisionMarginY = higherFalseMarginY;
+            collisionMarginY = options.higherFalseMarginY;
         }
 
-
-        if (Math.abs(this.coordinates.x - body.coordinates.x) < collisionMarginX &&
-            Math.abs(this.coordinates.y - body.coordinates.y) < collisionMarginY) {
+        if (Math.abs(this.coordinates.x - options.body.coordinates.x) < collisionMarginX &&
+            Math.abs(this.coordinates.y - options.body.coordinates.y) < collisionMarginY) {
             return true;
         }
         if (this.coordinates.x < 0) {
@@ -61,13 +58,25 @@ function createPhysicalBody(options) {
         return false;
     }
 
+    function applyGravity(gravity) {
+        if (this.coordinates.y === 500) {
+            return;
+        } else if (this.coordinates.y > 500) {
+            this.coordinates.y = 500;
+            this.speed.y = 0;
+            return;
+        }
+        this.speed.y += gravity;
+    }
+
     let physicalBody = {
         coordinates: options.coordinates,
         speed: options.speed,
         height: options.height,
         width: options.width,
         move: move,
-        collides: collides
+        collides: collides,
+        applyGravity: applyGravity
     };
 
     return physicalBody;

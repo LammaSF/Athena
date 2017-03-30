@@ -1,7 +1,6 @@
 window.addEventListener('load', function () {
-
-  // set browser icon
   setBrowserIcon('./images/icon.png');
+  themeSong.play();
 
   let $smurfImg = $('#smurfImg')
     .css({
@@ -28,6 +27,8 @@ window.addEventListener('load', function () {
   }).on('click', function () {
     $(this).css('display', 'none');
     $smurfImg.css('display', 'none');
+    themeSong.pause();
+    inTheForet.play();
     startGame();
   }).insertAfter($smurfImg);
 });

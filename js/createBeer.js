@@ -1,5 +1,4 @@
 function createBeer(beerContext, beerSpriteSheet, startingX, startingY) {
-
     let beerSprite = createSprite({
         spriteSheet: beerSpriteSheet,
         context: beerContext,

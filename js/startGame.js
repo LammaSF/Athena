@@ -1,13 +1,10 @@
-let themeSong = document.getElementById("audio");
-let drinkBeer = document.getElementById("drinkBeer");
-let inTheForet = document.getElementById("inTheForest");
-
-themeSong.play();
+let themeSong = document.getElementById("audio"),
+    drinkBeer = document.getElementById("drinkBeer"),
+    inTheForet = document.getElementById("inTheForest");
 
 function startGame() {
-    themeSong.pause();
-    inTheForet.play();
-
+    const GAMEHEIGHT = 600,
+        GAMEWIDTH = 1200;
     let beerCanvas = document.getElementById('beerCanvas'),
         beerContext = beerCanvas.getContext('2d'),
         beerSpriteSheet = document.getElementById('beerSpriteSheet');
@@ -30,29 +27,25 @@ function startGame() {
     let beers = [];
 
     function addBeer() {
-        const gameHeight = 600,
-            gameWidth = 1200;
 
-        let startingY = getRandomArbitrary(gameHeight / 2 - 50, gameHeight - 50);
-
+        let startingY = getRandomArbitrary((GAMEHEIGHT / 2) + 50, GAMEHEIGHT - 50);
+        //////////////////////////
         if (beers.length) {
             let lastBeer = beers[beers.length - 1];
 
-            let startingX = lastBeer.beerBody.coordinates.x + gameWidth / 4;
+            let startingX = lastBeer.beerBody.coordinates.x + GAMEWIDTH / 4;
             let newBeer = createBeer(beerContext, beerSpriteSheet, startingX, startingY);
 
             beers.push(newBeer);
         } else {
-            beers.push(createBeer(beerContext, beerSpriteSheet, gameWidth, startingY));
+            beers.push(createBeer(beerContext, beerSpriteSheet, GAMEWIDTH, startingY));
         }
     }
 
     let obstacles = [];
 
     function addObstacle() {
-        const gameWidth = 1200;
-
-        let startingX = getRandomArbitrary(gameWidth / 4, (gameWidth / 3) * 2);
+        let startingX = getRandomArbitrary(GAMEWIDTH / 4, (GAMEWIDTH / 3) * 2);
         let startingY = 465;
 
         if (obstacles.length) {
@@ -61,7 +54,7 @@ function startGame() {
             let newObstacle = createObstacle(obstacleContext, obstacleSpriteSheet, startingX, startingY);
             obstacles.push(newObstacle);
         } else {
-            obstacles.push(createObstacle(obstacleContext, obstacleSpriteSheet, gameWidth, startingY));
+            obstacles.push(createObstacle(obstacleContext, obstacleSpriteSheet, GAMEWIDTH, startingY));
         }
     }
 
@@ -70,68 +63,20 @@ function startGame() {
     let beerCounter = 0;
 
     let background = createBackground({
-        width: 1200,
-        height: 600,
+        width: GAMEWIDTH,
+        height: GAMEHEIGHT,
         speedX: 10
-    });
-
-    window.addEventListener('keydown', function (ev) {
-        switch (ev.keyCode) {
-            case 37:
-                if (smurfBody.speed.x < 0) {
-                    return;
-                }
-                smurfBody.speed.x -= 6;
-                break;
-            case 38:
-                if (smurfBody.coordinates.y < (smurfCanvas.height - smurfBody.height)) {
-                    return;
-                }
-                smurfBody.speed.y -= 13;
-                break;
-            case 39:
-                if (smurfBody.speed.x > 0) {
-                    return;
-                }
-                smurfBody.speed.x += 4;
-                break;
-            default:
-                break;
-        }
-    });
-
-    window.addEventListener('keyup', function (ev) {
-        switch (ev.keyCode) {
-            case 37:
-                smurfBody.speed.x = 0;
-                break;
-            case 39:
-                smurfBody.speed.x = 0;
-                break;
-            default:
-                break;
-        }
     });
 
     let smurf = createSmurf(smurfContext, smurfSpriteSheet);
     let smurfBody = smurf.smurfBody;
+    applyControls(smurfBody);
     let currentSmurfSprite = smurf.smurfSprite;
 
-    function applyGravity(physicalBody, gravity) {
-
-        if (physicalBody.coordinates.y === 500) {
-            return;
-        } else if (physicalBody.coordinates.y > 500) {
-            physicalBody.coordinates.y = 500;
-            physicalBody.speed.y = 0;
-            return;
-        }
-        physicalBody.speed.y += gravity;
-    }
     let live = 3;
-    function gameLoop() {
 
-        applyGravity(smurfBody, 0.7);
+    function gameLoop() {
+        smurfBody.applyGravity(0.7);
 
         if (beers.length) {
             for (i = 0; i < beers.length; i += 1) {
@@ -147,7 +92,13 @@ function startGame() {
 
                 beer.beerSprite.render(beer.beerBody.coordinates, beerLastCoordinates).update();
 
-                if (smurfBody.collides(beer.beerBody, 41, 31, 51, 41)) {
+                if (smurfBody.collides({
+                    body: beer.beerBody,
+                    leftTrueMarginX: 41,
+                    leftFalseMarginX: 31,
+                    higherTrueMarginY: 51,
+                    higherFalseMarginY: 41
+                })) {
                     beerContext.clearRect(
                         beer.beerBody.coordinates.x,
                         beer.beerBody.coordinates.y,
@@ -172,15 +123,13 @@ function startGame() {
             } else {
                 isDead = true;
             }
-
         } else {
             localStorage.setItem("highscore", beerCounter);
-
         }
+
         let $highscores = $('#hightscores');
         $highscores.css('display', 'block');
         $highscores.text('Най-добър резултат: ' + highscore);
-
 
         let $live = $('#live');
         $live.css('display', 'block');
@@ -193,7 +142,6 @@ function startGame() {
         if (obstacles.length) {
             for (i = 0; i < obstacles.length; i += 1) {
                 let obstacle = obstacles[i];
-                // debugger
 
                 if (obstacle.obstacleBody.coordinates.x < -obstacle.obstacleBody.width) {
                     obstacles.splice(i, 1);
@@ -205,56 +153,61 @@ function startGame() {
 
                 obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
 
-                if (smurfBody.collides(obstacle.obstacleBody, 43, 60, 50, 65)) {
-                    live -= 1;
-                    $live.text('' + live);
+                if (smurfBody.collides({
+                    body: obstacle.obstacleBody,
+                    leftTrueMarginX: 43,
+                    leftFalseMarginX: 60,
+                    higherTrueMarginY: 50,
+                    higherFalseMarginY: 65
+                })) {
+                        live -= 1;
+                        $live.text('' + live);
 
 
-                    obstacleContext.clearRect(obstacle.obstacleBody.coordinates.x, obstacle.obstacleBody.coordinates.y, obstacleCanvas.width, obstacleCanvas.height);
-                    obstacles.splice(i, 1);
-                    i -= 1;
+                        obstacleContext.clearRect(obstacle.obstacleBody.coordinates.x, obstacle.obstacleBody.coordinates.y, obstacleCanvas.width, obstacleCanvas.height);
+                        obstacles.splice(i, 1);
+                        i -= 1;
 
-                    $caughtBeers.text('Хванати бири: ' + beerCounter);
-                    if (live <= 0) {
-                        inTheForet.pause();
-                        smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
-                        beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
-                        gameOver(isDead);
-                        return
+                        $caughtBeers.text('Хванати бири: ' + beerCounter);
+                        if (live <= 0) {
+                            inTheForet.pause();
+                            smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
+                            beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
+                            obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
+                            gameOver(isDead);
+                            return;
+                        }
                     }
-
                 }
             }
+            if (obstacles.length <= 5) {
+                addObstacle();
+            }
+
+            let smurfLastCoordinates = smurfBody.move();
+            smurfLastCoordinates.x -= 5;
+
+            let currentSmurfSprite = smurf.currentSmurfSprite;
+            if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
+                currentSmurfSprite = smurf.smurfJumpingSprite;
+            } else {
+                currentSmurfSprite = smurf.smurfSprite;
+            }
+            currentSmurfSprite.render({
+                x: smurf.smurfBody.coordinates.x,
+                y: smurf.smurfBody.coordinates.y
+            }, smurfLastCoordinates).
+                update();
+
+            background.render();
+            background.update();
+
+            window.requestAnimationFrame(gameLoop);
         }
-        if (obstacles.length <= 5) {
-            addObstacle();
+
+        gameLoop();
+
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
         }
-
-        let smurfLastCoordinates = smurfBody.move();
-        smurfLastCoordinates.x -= 5;
-
-        let currentSmurfSprite = smurf.currentSmurfSprite;
-        if ((smurfBody.coordinates.y + smurfBody.height) < smurfCanvas.height) {
-            currentSmurfSprite = smurf.smurfJumpingSprite;
-        } else {
-            currentSmurfSprite = smurf.smurfSprite;
-        }
-        currentSmurfSprite.render({
-            x: smurf.smurfBody.coordinates.x,
-            y: smurf.smurfBody.coordinates.y
-        }, smurfLastCoordinates).
-        update();
-
-        background.render();
-        background.update();
-
-        window.requestAnimationFrame(gameLoop);
     }
-
-    gameLoop();
-
-    function getRandomArbitrary(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-}
