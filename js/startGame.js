@@ -123,7 +123,7 @@ function startGame() {
         }
         physicalBody.speed.y += gravity;
     }
-
+    let live = 3;
     function gameLoop() {
 
         applyGravity(smurfBody, 0.7);
@@ -176,6 +176,11 @@ function startGame() {
         $highscores.css('display', 'block');
         $highscores.text('Най-добър резултат: ' + highscore);
 
+
+        let $live = $('#live');
+        $live.css('display', 'block');
+        $live.text('' + live);
+
         if (beers.length <= 7) {
             addBeer();
         }
@@ -196,14 +201,23 @@ function startGame() {
                 obstacle.obstacleSprite.render(obstacle.obstacleBody.coordinates, obstacleLastCoordinates).update();
 
                 if (smurfBody.collides(obstacle.obstacleBody, 43, 60, 50, 65)) {
-                    beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
-                    smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
-                    obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
-                    beerCounter = 0;
+                    live -= 1;
+                    $live.text(''+live);
+
+
+                   obstacleContext.clearRect(obstacle.obstacleBody.coordinates.x, obstacle.obstacleBody.coordinates.y, obstacleCanvas.width, obstacleCanvas.height);
+                   obstacles.splice(i, 1);
+                   i-=1;
+
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
-                    inTheForet.pause();
-                    gameOver(isDead);
-                    return;
+                    if (live<=0) {
+                        inTheForet.pause();
+                        smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
+                        beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
+                        gameOver(isDead);
+                        return
+                    }
+
                 }
             }
         }
