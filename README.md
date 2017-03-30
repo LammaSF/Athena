@@ -20,6 +20,9 @@ https://github.com/LammaSF/Athena
 ## Telerik Academy Showcase System place
 http://best.telerikacademy.com/
 
+## The game
+https://lammasf.github.io/Athena/
+
 ## Project description
 This project is a simple implementation of the game "The Drunken Smurf".
 
