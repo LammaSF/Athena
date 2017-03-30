@@ -3,7 +3,7 @@
 ----------------------------------
 ![smurfGG](./MDFileImg/smurfGG.jpg)
 
-##Team members:
+## Team members:
 
  1. Lamma - Лиляна Бабачева
  2. Martina_Shebova - Мартина Шебова
@@ -14,13 +14,13 @@
  7. Petar.Yanev - Петър Янев
  8. DarkDawn - Иван Иванов
 
-##GitHub repository
+## GitHub repository
 https://github.com/LammaSF/Athena
 
-##Telerik Academy Showcase System place
+## Telerik Academy Showcase System place
 http://best.telerikacademy.com/
 
-##Project description
+## Project description
 This project is a simple implementation of the game "The Drunken Smurf".
 
 The game is operated through arrow keys and is a single-player game.
