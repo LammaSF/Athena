@@ -1,4 +1,6 @@
 ﻿function createBackground(options) {
+
+
     let backgroundCanvas = document.getElementById('background-canvas'),
         context = backgroundCanvas.getContext('2d'),
         backgroundImg = document.getElementById('background');

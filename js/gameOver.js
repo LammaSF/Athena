@@ -4,10 +4,11 @@ let winOne = document.getElementById("winOne");
 function gameOver(isDead, wrapper) {
     let $wrapper = $('#wrapper');
     $wrapper.css('display', 'none');
-    let $gameOverText = $('<p>GAME OVER</p>')
+    let $gameOverText = $('<p/>')
+        .html('GAME OVER')
         .css({
             'font-size': 50,
-            'color': 'red'
+            'color': '#61B3FF'
         });
     let $drunkSmurfImg = $('#gameOver')
         .css({
@@ -19,10 +20,11 @@ function gameOver(isDead, wrapper) {
             'display': 'block',
             'margin': 'auto'
         });
-    let $winText = $('<p>Поздравления! Подобри рекорда!</p>')
+    let $winText = $('<p />')
+        .html('Поздравления! Подобри рекорда!')
         .css({
             'font-size': 50,
-            'color': 'red'
+            'color': '#61B3FF'
         });
     if (isDead) {
 
@@ -39,8 +41,16 @@ function gameOver(isDead, wrapper) {
         winOne.play();
     }
 
-    let $restartButton = $('<input type="button" value="Restart" />');
-    let $resetHighscore = $('<input type="button" id="reset-highscore" value="Reset High score" />');
+    let $restartButton = $('<input />')
+        .attr('type', 'button')
+        .attr('value', 'Restart');
+
+
+    let $resetHighscore = $('<input />')
+        .attr('type', 'button')
+        .attr('value', 'Reset High Score')
+        .attr('id', 'reset-highscore');
+
 
     $restartButton.css({
         'margin': 50,
@@ -77,7 +87,10 @@ function gameOver(isDead, wrapper) {
         $resetHighscore.css('background-color', '#3c151e')
     }, function () {
         $resetHighscore.css('background-color', '#ab4242')
-    }).on('click', function () {
+    }).on('click', function (e) {
         window.localStorage.clear();
+        var target = e.target;
+            target.setAttribute('data-toggle', 'modal');
+            target.setAttribute('data-target', '#myModal');
     }).appendTo($('body'));
 }
