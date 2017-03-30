@@ -30,24 +30,29 @@ function startGame() {
     let beers = [];
 
     function addBeer() {
-        let startingY = getRandomArbitrary(350, 550);
+        const gameHeight = 600,
+            gameWidth = 1200;
+
+        let startingY = getRandomArbitrary(gameHeight / 2 - 50, gameHeight - 50);
 
         if (beers.length) {
             let lastBeer = beers[beers.length - 1];
 
-            let startingX = lastBeer.beerBody.coordinates.x + 300;
+            let startingX = lastBeer.beerBody.coordinates.x + gameWidth / 4;
             let newBeer = createBeer(beerContext, beerSpriteSheet, startingX, startingY);
 
             beers.push(newBeer);
         } else {
-            beers.push(createBeer(beerContext, beerSpriteSheet, 1200, startingY));
+            beers.push(createBeer(beerContext, beerSpriteSheet, gameWidth, startingY));
         }
     }
 
     let obstacles = [];
 
     function addObstacle() {
-        let startingX = getRandomArbitrary(300, 800);
+        const gameWidth = 1200;
+
+        let startingX = getRandomArbitrary(gameWidth / 4, (gameWidth / 3) * 2);
         let startingY = 465;
 
         if (obstacles.length) {
@@ -56,7 +61,7 @@ function startGame() {
             let newObstacle = createObstacle(obstacleContext, obstacleSpriteSheet, startingX, startingY);
             obstacles.push(newObstacle);
         } else {
-            obstacles.push(createObstacle(obstacleContext, obstacleSpriteSheet, 1200, startingY));
+            obstacles.push(createObstacle(obstacleContext, obstacleSpriteSheet, gameWidth, startingY));
         }
     }
 
@@ -170,10 +175,12 @@ function startGame() {
 
         } else {
             localStorage.setItem("highscore", beerCounter);
+
         }
         let $highscores = $('#hightscores');
         $highscores.css('display', 'block');
         $highscores.text('Най-добър резултат: ' + highscore);
+
 
         let $live = $('#live');
         $live.css('display', 'block');
@@ -186,6 +193,7 @@ function startGame() {
         if (obstacles.length) {
             for (i = 0; i < obstacles.length; i += 1) {
                 let obstacle = obstacles[i];
+                // debugger
 
                 if (obstacle.obstacleBody.coordinates.x < -obstacle.obstacleBody.width) {
                     obstacles.splice(i, 1);
@@ -209,7 +217,6 @@ function startGame() {
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
                     if (live <= 0) {
                         inTheForet.pause();
-                        obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
                         smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
                         beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
                         gameOver(isDead);
@@ -236,7 +243,7 @@ function startGame() {
             x: smurf.smurfBody.coordinates.x,
             y: smurf.smurfBody.coordinates.y
         }, smurfLastCoordinates).
-            update();
+        update();
 
         background.render();
         background.update();
@@ -249,4 +256,5 @@ function startGame() {
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
+
 }
