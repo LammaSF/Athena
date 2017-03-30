@@ -23,6 +23,9 @@ http://best.telerikacademy.com/
 ## The game
 https://lammasf.github.io/Athena/
 
+## Youtube
+https://www.youtube.com/watch?v=CPI_iWKQJKg&feature=youtu.be
+
 ## Project description
 This project is a simple implementation of the game "The Drunken Smurf".
 
