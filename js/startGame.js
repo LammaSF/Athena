@@ -70,7 +70,7 @@ function startGame() {
         speedX: 10
     });
 
-    window.addEventListener('keydown', function(ev) {
+    window.addEventListener('keydown', function (ev) {
         switch (ev.keyCode) {
             case 37:
                 if (smurfBody.speed.x < 0) {
@@ -95,7 +95,7 @@ function startGame() {
         }
     });
 
-    window.addEventListener('keyup', function(ev) {
+    window.addEventListener('keyup', function (ev) {
         switch (ev.keyCode) {
             case 37:
                 smurfBody.speed.x = 0;
@@ -170,12 +170,10 @@ function startGame() {
 
         } else {
             localStorage.setItem("highscore", beerCounter);
-
         }
         let $highscores = $('#hightscores');
         $highscores.css('display', 'block');
         $highscores.text('Най-добър резултат: ' + highscore);
-
 
         let $live = $('#live');
         $live.css('display', 'block');
@@ -188,7 +186,6 @@ function startGame() {
         if (obstacles.length) {
             for (i = 0; i < obstacles.length; i += 1) {
                 let obstacle = obstacles[i];
-                // debugger
 
                 if (obstacle.obstacleBody.coordinates.x < -obstacle.obstacleBody.width) {
                     obstacles.splice(i, 1);
@@ -202,16 +199,17 @@ function startGame() {
 
                 if (smurfBody.collides(obstacle.obstacleBody, 43, 60, 50, 65)) {
                     live -= 1;
-                    $live.text(''+live);
+                    $live.text('' + live);
 
 
-                   obstacleContext.clearRect(obstacle.obstacleBody.coordinates.x, obstacle.obstacleBody.coordinates.y, obstacleCanvas.width, obstacleCanvas.height);
-                   obstacles.splice(i, 1);
-                   i-=1;
+                    obstacleContext.clearRect(obstacle.obstacleBody.coordinates.x, obstacle.obstacleBody.coordinates.y, obstacleCanvas.width, obstacleCanvas.height);
+                    obstacles.splice(i, 1);
+                    i -= 1;
 
                     $caughtBeers.text('Хванати бири: ' + beerCounter);
-                    if (live<=0) {
+                    if (live <= 0) {
                         inTheForet.pause();
+                        obstacleContext.clearRect(0, 0, obstacleCanvas.width, obstacleCanvas.height);
                         smurfContext.clearRect(0, 0, smurfCanvas.width, smurfCanvas.height);
                         beerContext.clearRect(0, 0, beerCanvas.width, beerCanvas.height);
                         gameOver(isDead);
@@ -238,7 +236,7 @@ function startGame() {
             x: smurf.smurfBody.coordinates.x,
             y: smurf.smurfBody.coordinates.y
         }, smurfLastCoordinates).
-        update();
+            update();
 
         background.render();
         background.update();
@@ -251,5 +249,4 @@ function startGame() {
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
-
 }
