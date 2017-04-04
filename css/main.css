@@ -1,6 +1,7 @@
 body {
-    background-image: url('../images/background1.jpg');
+    background: url('../images/background1.jpg') center center fixed;
     text-align: center;
+    background-size: cover;
 }
 
 #wrapper {
